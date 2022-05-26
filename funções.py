@@ -63,13 +63,19 @@ def imprimir_os_dados(recursos_totais,matriz_alocados,recursos_alocados,recursos
     print()
     input('Pressione Enter para continuar')
     os.system('clear')
+
+
+
 def algoritmo_banqueiro(qtd_processos,qtd_tipos_recursos,recursos_disponiveis,matriz_alocados,matriz_recursos_necessarios):
     rodando = np.ones(qtd_processos,dtype='int64')
+
+
     while np.count_nonzero(rodando) >0:
         alocou_recursos = False
         for num_processo in range(qtd_processos):
+
             if(rodando[num_processo]) != 0:
-                if all(i>= 0 for i in recursos_disponiveis - (matriz_recursos[num_processo] - matriz_alocados[num_processo])):
+                if all(i>= 0 for i in recursos_disponiveis - (matriz_recursos_necessarios[num_processo] - matriz_alocados[num_processo])):
                     alocou_recursos = True
                     print('Processo %d está rodando '% (num_processo +1))
                     input('Pressione enter para prosseguir \n')
@@ -81,7 +87,7 @@ def algoritmo_banqueiro(qtd_processos,qtd_tipos_recursos,recursos_disponiveis,ma
                     print('Recursos Necessários R=\n',matriz_alocados)
                     print()
 
-            if alocou_recursos == false:
+            if alocou_recursos == False:
                 print('--> Os processos estarão em Deadlock')
                 exit()
 
